@@ -200,14 +200,14 @@ class Util {
        
         if ($delimiter == "{") {
             foreach($data as $key => $value) {
-                $string .= "" . $key . " = {" . $value . "}," . "\n";
+                $string .= "" . $key . "={" . $value . "}," . "\n";
             }
             $string = rtrim(trim($string), ",");
             $string .= "\n";
         } else {
 
             foreach($data as $key => $value) {
-                $string .= "" . $key . " = " . $delimiter . $value . $delimiter . "," . "\n";
+                $string .= "" . $key . "=" . $delimiter . $value . $delimiter . "," . "\n";
             }            
             $string = rtrim(trim($string), ",");
             $string .= "\n";
