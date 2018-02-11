@@ -38,6 +38,7 @@ class Springer {
         foreach($htmlValues as $htmlValue) {
 
             $data     = self::getTitleAndUrlAndDocFromHTML($htmlValue);
+            
             Util::showMessage($data["title"]);
 
             if ( strpos($data["url_article"], "book") !== false ) {
@@ -46,8 +47,9 @@ class Springer {
             }
             
             $bibtex      = self::getBibtex($data["doc"]);
-            if ( strpos($bibtex, "Internal Server Error") !== false ) {
-                Util::showMessage("It was not possible download bibtex file: Internal Server Error");
+            
+            if ( strpos($bibtex, "Internal Server Error") !== false || strpos($bibtex, "Page not found") !== false) {
+                Util::showMessage("It was not possible download bibtex file: Internal Server Error or Page not found");
                 sleep(rand(2,4)); // rand between 2 and 4 seconds
                 continue;
             }
@@ -81,9 +83,13 @@ class Springer {
         $url        = trim(Util::getURLFromHTML($values[0]));
         $title      = trim(strip_tags($values[0]));
 
-        $docs = explode("/", $url);
+        $docs = explode("/", $url);        
         $lengh = count($docs);
-        $doc = @$docs[$lengh-2] . "/" . @$docs[$lengh-1];
+        $doc = "";
+        for($i=2;$i<$lengh;$i++) {
+            $doc .= $docs[$i] . "/"; 
+        }
+        $doc = rtrim($doc, "/");
 
         if (strpos($url, "http") === false) {
             $url = self::$URL . $url;
