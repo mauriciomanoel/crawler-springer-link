@@ -40,7 +40,7 @@
             $language = "En";
         }
         
-        $file           = Util::slug(trim($file_name)) . ".bib";
+        $file           = Util::slug(trim($file_name)) . (!empty($content_type) ? "_" . $content_type : "") . ".bib";
         $url            = Springer::getUrl(1, $query_string);
         $cookie         = Util::getCookie($url);
         $user_agent     = (!empty($_SERVER["HTTP_USER_AGENT"])) ? $_SERVER["HTTP_USER_AGENT"] : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0) Gecko/20100101 Firefox/58.0";

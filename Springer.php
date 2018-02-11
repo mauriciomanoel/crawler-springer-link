@@ -107,7 +107,14 @@ class Springer {
         return $retorno;
     }
         
-    private static function getBibtex($doc) {        
+    public static function getBibtex($doc) {        
+        $url = "https://citation-needed.springer.com/v2/references/$doc?format=bibtex&flavour=citation";
+        $bibtex = Util::loadURL($url, COOKIE, USER_AGENT);
+        $bibtex = strip_tags($bibtex); // remove html tags 
+        return $bibtex;        
+    }
+    
+    public static function getPDF($doc) {        
         $url = "https://citation-needed.springer.com/v2/references/$doc?format=bibtex&flavour=citation";
         $bibtex = Util::loadURL($url, COOKIE, USER_AGENT);
         $bibtex = strip_tags($bibtex); // remove html tags 
