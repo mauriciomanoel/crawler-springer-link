@@ -62,15 +62,17 @@ class Springer {
                 $bibtex_new .= $bibtex;
             }
             
+            var_dump($file, $bibtex_new);
+            file_put_contents($file, $bibtex_new, FILE_APPEND);
+            exit;
             Util::showMessage("Download bibtex file OK.");
             Util::showMessage("");
             sleep(rand(2,4)); // rand between 2 and 4 seconds
         }
 
         if (!empty($bibtex_new)) {
-            $oldContent = @file_get_contents($file);
-            $newContent = $oldContent . $bibtex_new;
-            file_put_contents($file, $newContent);
+            var_dump($file, $bibtex_new);
+            file_put_contents($file, $bibtex_new, FILE_APPEND);
             Util::showMessage("File $file saved successfully.");
             Util::showMessage("");
         }
