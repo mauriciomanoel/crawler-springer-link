@@ -63,7 +63,7 @@ class Springer {
             }
             
             var_dump($file, $bibtex_new);
-            file_put_contents($file, $bibtex_new, FILE_APPEND);
+            var_dump(file_put_contents($file, $bibtex_new, FILE_APPEND));
             exit;
             Util::showMessage("Download bibtex file OK.");
             Util::showMessage("");
