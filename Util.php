@@ -192,7 +192,7 @@ class Util {
         return "";
     }
 
-    function add_fields_bibtex($bibtex, $data) 
+    public static function add_fields_bibtex($bibtex, $data) 
     {
         $bibtex = trim($bibtex);
         $string = "";
@@ -225,11 +225,11 @@ class Util {
         return $bibtex;
     }
 
-    function arrayToString($value) {
+    public static function arrayToString($value) {
         return implode(" ", $value);
     }
 
-	function getDelimiter($string)
+	public static function getDelimiter($string)
 	{
         $string = trim($string);
         $string = str_replace(array(" ","\n"), "", $string);

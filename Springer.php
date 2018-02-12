@@ -76,7 +76,7 @@ class Springer {
         }
     }
 
-    function getTitleAndUrlAndDocFromHTML($html) {
+    public static function getTitleAndUrlAndDocFromHTML($html) {
         $retorno    = array("url_article"=>"", "title"=> "", "doc"=>"");
         $classname  = "title";
         $values     = Util::getHTMLFromClass($html, $classname, "a");
