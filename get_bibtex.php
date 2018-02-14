@@ -41,12 +41,13 @@
         }
         
         $file           = Util::slug(trim($file_name)) . (!empty($content_type) ? "_" . $content_type : "") . ".bib";
-        $url            = Springer::getUrl(1, $query_string);
+        $url            = "bibtex/" . Springer::getUrl(1, $query_string);
         $cookie         = Util::getCookie($url);
         $user_agent     = (!empty($_SERVER["HTTP_USER_AGENT"])) ? $_SERVER["HTTP_USER_AGENT"] : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0) Gecko/20100101 Firefox/58.0";
         define('USER_AGENT', $user_agent);   
         define('COOKIE', @$cookie);
         define('FILE', $file);
+        define('FILE_LOG', Util::slug(trim($file_name)) . "_log.txt");
 
         if (!empty($page)) {            
             Springer::start($page, $query_string, $url, $file, $content_type, $language);
@@ -64,6 +65,6 @@
         }
 
     } catch(Exception $e) {
-        echo $e->getMessage() . BREAK_LINE;
+        Util::showMessage($e->getMessage());
     }
 ?>

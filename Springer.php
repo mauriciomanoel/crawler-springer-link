@@ -14,12 +14,12 @@ class Springer {
             $language = "&facet-language=\"$language\"";
         } 
         $url = self::$URL . "/search/page/$page?query=$query" . $content_type . $language;
-        
+        Util::showMessage($url);
         return $url;
     }
 
     public static function start($page, $query_string, $url, $file, $content_type, $language) {
-        echo "Page: " . $page . BREAK_LINE;
+        Util::showMessage("Page: " . $page);
         $url = self::getUrl($page, $query_string, $content_type, $language);
         self::progress($url, $file);
     }
@@ -29,7 +29,7 @@ class Springer {
         
         // Check Google Captcha
         if ( strpos($html, "gs_captcha_cb()") !== false || strpos($html, "sending automated queries") !== false ) {
-            echo "Captha detected" . BREAK_LINE; exit;
+            Util::showMessage("Captha detected"); exit;
         }
 
         $classname = "no-access";
@@ -62,16 +62,12 @@ class Springer {
                 $bibtex_new .= $bibtex;
             }
             
-            var_dump($file, $bibtex_new);
-            var_dump(file_put_contents($file, $bibtex_new, FILE_APPEND));
-            exit;
             Util::showMessage("Download bibtex file OK.");
             Util::showMessage("");
             sleep(rand(2,4)); // rand between 2 and 4 seconds
         }
 
         if (!empty($bibtex_new)) {
-            var_dump($file, $bibtex_new);
             file_put_contents($file, $bibtex_new, FILE_APPEND);
             Util::showMessage("File $file saved successfully.");
             Util::showMessage("");
