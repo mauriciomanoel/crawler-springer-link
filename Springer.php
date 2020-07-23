@@ -14,7 +14,7 @@ class Springer {
             $language = "&facet-language=\"$language\"";
         } 
         $url = self::$URL . "/search/page/$page?query=$query" . $content_type . $language;
-        Util::showMessage($url);
+        //Util::showMessage($url);
         return $url;
     }
 
@@ -35,6 +35,7 @@ class Springer {
         $classname = "no-access";
         $htmlValues = Util::getHTMLFromClass($html, $classname, "li");        
         $bibtex_new = "";
+        Util::showMessage("Total " . count($htmlValues)); 
         foreach($htmlValues as $htmlValue) {
 
             $data     = self::getTitleAndUrlAndDocFromHTML($htmlValue);
